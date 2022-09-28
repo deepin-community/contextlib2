@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e -u
+cp test_contextlib2.py "$AUTOPKGTEST_TMP"
+cd "$AUTOPKGTEST_TMP/"
+export PYTHONWARNINGS=d
+(py3versions -s) \
+| tr ' ' '\n' \
+| xargs -I {} env {} \
+  -m unittest discover --verbose 2>&1
